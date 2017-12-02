@@ -2,7 +2,6 @@
 #include "Player.h"
 #include <string>
 #include "Printer.h"
-#include <algorithm>
 
 using namespace std;
 
@@ -49,17 +48,38 @@ int Player::getLeftBet()
 void Player::addCard(Card card)
 {
 	cards.push_back(card);
+	updateCardTotal(card);
 }
 
 vector<int> Player::getCardTotal()
 {
-	vector<int> total;
-	recursive_get_card_total(total, 0, 0);
-	sort(total.begin(), total.end());
-	return total;
+	return cardTotal;
 }
 
-void Player::recursive_get_card_total(std::vector<int>& total, int current_index, int temp_sum)
+void Player::updateCardTotal(Card newCard)
+{
+	int num = newCard.getNumber();
+	if (num != 1)
+	{
+		int size = cardTotal.size();
+		for (int i = 0; i < size; ++i)
+		{
+			cardTotal[i] += num;
+		}
+	}
+	else
+	{
+		int size = cardTotal.size();
+		for (int i = 0; i < size; ++i)
+		{
+			int origin_sum = cardTotal[i];
+			cardTotal[i] += 1;
+			cardTotal.push_back(origin_sum + 11);
+		}
+	}
+}
+
+/*void Player::recursive_get_card_total(std::vector<int>& total, int current_index, int temp_sum)
 {
 	if (current_index == cards.size())
 	{
@@ -77,4 +97,4 @@ void Player::recursive_get_card_total(std::vector<int>& total, int current_index
 		recursive_get_card_total(total, current_index + 1, temp_sum + 1);
 		recursive_get_card_total(total, current_index + 1, temp_sum + 11);
 	}
-}
+}*/

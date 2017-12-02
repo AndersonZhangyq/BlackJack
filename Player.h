@@ -18,7 +18,9 @@ public:
 	void addCard(Card card);
 	std::vector<int> getCardTotal();
 private:
-	void recursive_get_card_total(std::vector<int>& total, int curernt_index, int temp_sum);
+	// void recursive_get_card_total(std::vector<int>& total, int curernt_index, int temp_sum);
+	void updateCardTotal(Card newCard);
+	std::vector<int> cardTotal;
 	std::vector<Card> cards;
 	Bet* bet_;
 	Hand* hand_;
