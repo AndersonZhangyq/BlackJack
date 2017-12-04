@@ -45,12 +45,18 @@
     <ClInclude Include="Bet.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Printer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Judger.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="defined_code.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="BlackJack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="BlackJackGame.cpp">
@@ -66,6 +72,24 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Judger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Printer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dealer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackJack.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Hand.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

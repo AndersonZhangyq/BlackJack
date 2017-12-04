@@ -1,14 +1,22 @@
 #pragma once
-#include "Person.h"
-#include "Hand.h"
 #include "Bet.h"
-#include <string>
+#include "Hand.h"
+#include "Card.h"
+#include <vector>
 
-class Dealer : Person {
+class BlackJackGame;
+
+class Dealer{
 public:
 	Dealer();
-	Dealer(std::string _name);
+	Dealer(BlackJackGame game);
+	std::string getHandDescriptionString() const;
+	bool isBlackJack() const;
+	void addCard(Card card) const;
+	int getBest() const;
+	std::vector<int> getCardTotal() const;
+	void reset();
 private:
-	Bet* bet_;
 	Hand* hand_;
+	BlackJackGame* game_;
 };

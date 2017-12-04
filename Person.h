@@ -5,7 +5,7 @@ class Person {
 public:
 	Person();
 	Person(std::string name);
-	std::string getName();
+	std::string getName() const;
 private:
 	std::string name;
 };

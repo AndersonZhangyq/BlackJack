@@ -11,12 +11,12 @@ Card::Card(int num, Card_type type)
 	this->type = type;
 }
 
-int Card::getNumber()
+int Card::getNumber() const
 {
 	return number;
 }
 
-std::string Card::getType()
+std::string Card::getType() const
 {
 	std::string card_type = "";
 	switch (type) {
@@ -36,7 +36,7 @@ std::string Card::getType()
 	return card_type;
 }
 
-std::string Card::getStringDescription()
+std::string Card::getStringDescription() const
 {
 	std::string description = getType() + "  ";
 	switch (number)

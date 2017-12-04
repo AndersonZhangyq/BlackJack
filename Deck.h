@@ -1,13 +1,13 @@
 #pragma once
-#include <vector>
 #include "Card.h"
+#include <vector>
 
 class Deck {
 public:
 	Deck();
 	Deck(int deckNumber);
 	Card getCard();
-	bool canDraw();
+	void restore();
 private:
 	int deckNumber;
 

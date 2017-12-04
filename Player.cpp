@@ -1,82 +1,78 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "BlackJackGame.h"
 #include <string>
-#include "Printer.h"
 
 using namespace std;
 
-Player::Player() : bet_(new Bet()), hand_(new Hand())
+Player::Player()
 {
 }
 
-Player::Player(std::string _name) : Person(_name), bet_(new Bet()), hand_(new Hand())
+Player::Player(BlackJackGame game) :bet_(new Bet()), hand_(new Hand())
 {
+	game_ = &game;
 }
 
-string Player::getHand()
+string Player::getHandDescriptionString() const
 {
-	string handInString = "";
-	for (Card card : cards)
-	{
-		handInString += card.getStringDescription();
-	}
-	return handInString;
+	return hand_->getHandDescriptionString();
 }
 
-int Player::getTotalBet()
+int Player::getTotalBet() const
 {
 	return bet_->getBetInUse();
 }
 
-bool Player::doubleBet()
+bool Player::setBet(int bet) const
 {
-	if (bet_->couldDoubleBet())
-	{
-		bet_->doubleBet();
-		Printer::doubleBet(true, getLeftBet(), getTotalBet());
-		return true;
-	}
-	Printer::doubleBet(false, getLeftBet(), getTotalBet());
-	return false;
+	return bet_->setBet(bet);
 }
 
-int Player::getLeftBet()
+bool Player::doubleBet() const
+{	
+	return bet_->doubleBet();
+}
+
+int Player::getLeftBet() const
 {
 	return bet_->getLeftBet();
 }
 
-void Player::addCard(Card card)
+void Player::addCard(Card card) const
 {
-	cards.push_back(card);
-	updateCardTotal(card);
+	hand_->addCard(card);
 }
 
-vector<int> Player::getCardTotal()
+vector<int> Player::getCardTotal() const
 {
-	return cardTotal;
+	return hand_->getCardTotal();
 }
 
-void Player::updateCardTotal(Card newCard)
+bool Player::tryDouble() const
 {
-	int num = newCard.getNumber();
-	if (num != 1)
-	{
-		int size = cardTotal.size();
-		for (int i = 0; i < size; ++i)
-		{
-			cardTotal[i] += num;
-		}
-	}
-	else
-	{
-		int size = cardTotal.size();
-		for (int i = 0; i < size; ++i)
-		{
-			int origin_sum = cardTotal[i];
-			cardTotal[i] += 1;
-			cardTotal.push_back(origin_sum + 11);
-		}
-	}
+	return bet_->tryDouble();
+}
+
+bool Player::isBlackJack() const
+{
+	return hand_->isBlackJack();
+}
+
+int Player::getBest() const
+{
+	return hand_->getBest();
+}
+
+void Player::endGameSet(GameResult result,float tiems) const
+{
+	bet_->endGameSet(result, tiems);
+	hand_->reset();
+}
+
+bool Player::canStartGame() const
+{
+	return bet_->canStartGame();
 }
 
 /*void Player::recursive_get_card_total(std::vector<int>& total, int current_index, int temp_sum)

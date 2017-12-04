@@ -10,7 +10,7 @@ Person::Person(std::string name)
 	this->name = name;
 }
 
-std::string Person::getName()
+std::string Person::getName() const
 {
 	return name;
 }

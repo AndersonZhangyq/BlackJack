@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "Deck.h"
+#include <ctime>
 
 using namespace std;
 
 Deck::Deck()
 {
+	srand(time(0));
 	deckNumber = 1;
 	vector<int> tmp = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 };
 	allCards.push_back(tmp);
@@ -12,6 +14,7 @@ Deck::Deck()
 
 Deck::Deck(int deckNumber)
 {
+	srand(time(0));
 	this->deckNumber = deckNumber;
 	vector<int> tmp = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 };
 	for (int i = 0; i < deckNumber; i++) {
@@ -21,15 +24,23 @@ Deck::Deck(int deckNumber)
 
 Card Deck::getCard()
 {
-	if (canDraw())
+	int deck_index = rand() % allCards.size();
+	int card_index = rand() % allCards[deck_index].size();
+	int card = allCards[deck_index][card_index];
+	allCards[deck_index].erase(allCards[deck_index].begin() + card_index);
+	if (allCards[deck_index].size() == 0)
 	{
-		int card_index = rand() % allCards[0].size();
-		int card = allCards[0][card_index];		
-		return Card(card / 52, Card_type(card % 4));
+		allCards.erase(allCards.begin());
+		if (allCards.size() == 0)
+			restore();
 	}
+	return Card(card / 4 + 1, Card_type(card % 4));
 }
 
-bool Deck::canDraw()
+void Deck::restore()
 {
-	return allCards[0].size() != 0;
+	vector<int> tmp = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 };
+	for (int i = 0; i < deckNumber; i++) {
+		allCards.push_back(tmp);
+	}
 }
