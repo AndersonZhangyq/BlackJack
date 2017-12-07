@@ -21,13 +21,11 @@ BlackJackGame::BlackJackGame(int playerAmount, int deckAmount)
 
 void BlackJackGame::startGame()
 {
-	if (preCheck() == false)
-	{
-		cout << "没有玩家可以开始游戏，游戏结束！" << endl;
-		return;
-	}
 	cout << endl << "------ 开始下注 ------" << endl;
 	for (int i = 0; i < player_amount; i++) {
+		//  玩家处于无法继续游戏的状态
+		if (playerStatus[i] == Exit)
+			continue;
 		cout << endl;
 		do
 		{
@@ -64,6 +62,9 @@ void BlackJackGame::startGame()
 	cout << endl << "------ 第二轮发牌开始 ------" << endl;
 	for (int i = 0; i < player_amount; ++i)
 	{
+		//  玩家处于无法继续游戏的状态
+		if (playerStatus[i] == Exit)
+			continue;
 		cout << endl;
 		cardGot = deck.getCard();
 		players[i].addCard(cardGot);

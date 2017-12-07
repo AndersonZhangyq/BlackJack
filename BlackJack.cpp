@@ -12,6 +12,11 @@ int main(int argc, char* argv[])
 	BlackJackGame game(playerNum);
 	while (true)
 	{
+		if (game.preCheck() == false)
+		{
+			cout << "没有玩家可以开始游戏，游戏结束！" << endl;
+			break;
+		}
 		game.startGame();
 		cout << "继续游戏吗？ [y/N]" << endl;
 		string continueGame;
@@ -19,6 +24,6 @@ int main(int argc, char* argv[])
 		if (continueGame != "y")
 			break;
 	}
-	cout << "游戏以结束，退出程序中......" << endl;
+	cout << endl <<  "游戏已结束，退出程序中......" << endl;
 	return 0;
 }

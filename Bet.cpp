@@ -15,7 +15,7 @@ int Bet::getLeftBet() const
 
 bool Bet::canDoubleBet() const
 {
-	return amount > betInUse;
+	return amount >= betInUse;
 }
 
 bool Bet::canSetBet(int bet) const

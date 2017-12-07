@@ -12,6 +12,7 @@ public:
 	std::string getType() const;
 	std::string getStringDescription() const;
 private:
+	std::string cardNumber;
 	int number;
 	Card_type type;
 };

@@ -10,13 +10,13 @@ void Judger::judgeWinner(Player player, Dealer dealer,int player_id, float times
 {
 	if (dealer.isBlackJack())
 	{
-		cout << "玩家  " << player_id << " 输了！庄家拿到了 BlackJack！";
+		cout << "玩家  " << player_id << " 输了！庄家拿到了 BlackJack！" << endl;
 		player.endGameSet(Lose, times);
 		return;
 	}
 	if (player.isBlackJack())
 	{
-		cout << "玩家 " << player_id << " 赢了！BlackJack 最大！";
+		cout << "玩家 " << player_id << " 赢了！BlackJack 最大！" << endl;
 		player.endGameSet(Win, times);
 		return;
 	}
@@ -28,8 +28,8 @@ void Judger::judgeWinner(Player player, Dealer dealer,int player_id, float times
 		player.endGameSet(Win, times);
 	}else if (p_b < d_b)
 	{
-		cout << "玩家 " << player_id << " 赢了！手牌总和为：" << p_b;
-		player.endGameSet(Win, times);
+		cout << "玩家 " << player_id << " 输了！手牌总和为：" << p_b;
+		player.endGameSet(Lose, times);
 	}
 	else
 	{

@@ -7,6 +7,25 @@ Card::Card()
 
 Card::Card(int num, Card_type type)
 {
+	if (num == 1)
+		cardNumber = "A";
+	else if (num >= 2 && num <= 10)
+		cardNumber = std::to_string(num);
+	else
+	{
+		switch (num)
+		{
+		case 11:
+			cardNumber = "J";
+			break;
+		case 12:
+			cardNumber = "Q";
+			break;
+		case 13:
+			cardNumber = "K";
+			break;
+		}
+	}
 	number = num >= 10 ? 10 : num;
 	this->type = type;
 }
@@ -38,23 +57,6 @@ std::string Card::getType() const
 
 std::string Card::getStringDescription() const
 {
-	std::string description = getType() + "  ";
-	switch (number)
-	{
-	case 1:
-		description += "A";
-		break;
-	case 11:
-		description += "J";
-		break;
-	case 12:
-		description += "Q";
-		break;
-	case 13:
-		description += "K";
-		break;
-	default:
-		description += std::to_string(number);
-	}
+	std::string description = getType() + "  " + cardNumber;
 	return description;
 }
