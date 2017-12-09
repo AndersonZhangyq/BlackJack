@@ -152,7 +152,6 @@
     <ClInclude Include="defined_code.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="Judger.h" />
-    <ClInclude Include="Person.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Printer.h" />
     <ClInclude Include="stdafx.h" />
@@ -167,7 +166,6 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="Judger.cpp" />
-    <ClCompile Include="Person.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Printer.cpp" />
     <ClCompile Include="stdafx.cpp">

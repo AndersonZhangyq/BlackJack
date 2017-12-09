@@ -33,9 +33,6 @@
     <ClInclude Include="Hand.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -72,9 +69,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Person.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Judger.cpp">
