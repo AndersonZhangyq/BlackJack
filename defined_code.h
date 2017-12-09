@@ -27,6 +27,7 @@ enum OperationCode
 	Hit,
 	Stand,
 	Deal,
+	AddBet,
 	Terminate,
 
 	// For preConfig

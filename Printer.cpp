@@ -5,16 +5,16 @@
 
 using namespace std;
 
-void Printer::doubleBet(bool isSuccess, int betLeft, int totalBet)
+void Printer::addBet(bool isSuccess, int betLeft, int totalBet)
 {
 	if (isSuccess)
 	{
-		cout << "你已经加倍赌注. 当前赌注为 " << totalBet << endl
+		cout << "你已经增加赌注. 当前赌注为 " << totalBet << endl
 			<< "你还剩余的赌注为 " << betLeft << endl;
 	}
 	else
 	{
-		cout << "你没有足够的赌注来加倍！当前赌注为 " << totalBet << endl
+		cout << "你没有足够的赌注！当前赌注为 " << totalBet << endl
 			<< "你还剩余的赌注为 " << betLeft << endl;
 	}
 }
@@ -39,7 +39,8 @@ void Printer::commandHelper()
 		<< Hit << "：Hit,  "
 		<< Stand << "：Stand,  "
 		<< Deal << "：Deal,  "
-		<< Terminate << "：Terminate" << endl;
+		<< Terminate << "：Terminate,  "
+		<< AddBet << "：Add bet,  " << endl;
 }
 
 void Printer::removeCardCommandHelper()

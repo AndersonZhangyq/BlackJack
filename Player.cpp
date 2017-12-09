@@ -29,9 +29,9 @@ bool Player::setBet(int bet) const
 	return bet_->setBet(bet);
 }
 
-bool Player::doubleBet() const
+bool Player::addBet(int adds) const
 {
-	return bet_->doubleBet();
+	return bet_->addBet(adds);
 }
 
 int Player::getLeftBet() const
@@ -49,9 +49,9 @@ vector<int> Player::getCardTotal() const
 	return hand_->getCardTotal();
 }
 
-bool Player::tryDouble() const
+bool Player::tryAddBet(int adds) const
 {
-	return bet_->tryDouble();
+	return bet_->tryAddBet(adds);
 }
 
 bool Player::isBlackJack() const

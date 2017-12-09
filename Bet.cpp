@@ -13,9 +13,9 @@ int Bet::getLeftBet() const
 	return amount;
 }
 
-bool Bet::canDoubleBet() const
+bool Bet::canAddBet(int adds) const
 {
-	return amount >= betInUse;
+	return amount >= adds;
 }
 
 bool Bet::canSetBet(int bet) const
@@ -28,16 +28,18 @@ int Bet::getBetInUse() const
 	return betInUse;
 }
 
-bool Bet::doubleBet()
+bool Bet::addBet(int adds)
 {
-	if (canDoubleBet() == false)
+	if (adds == -1)
+		adds = betInUse;
+	if (canAddBet(adds) == false)
 	{
-		Printer::doubleBet(false, amount, betInUse);
+		Printer::addBet(false, amount, adds);
 		return false;
 	}
-	amount -= betInUse;
-	betInUse *= 2;
-	Printer::doubleBet(true, amount, betInUse);
+	amount -= adds;
+	betInUse += adds;
+	Printer::addBet(true, amount, betInUse);
 	return true;
 }
 
@@ -54,9 +56,11 @@ bool Bet::setBet(int bet)
 	return false;
 }
 
-bool Bet::tryDouble() const
+bool Bet::tryAddBet(int adds) const
 {
-	return canDoubleBet();
+	if (adds == -1)
+		adds = betInUse;
+	return canAddBet(adds);
 }
 
 void Bet::endGameSet(GameResult resullt, float times)

@@ -15,11 +15,11 @@ public:
 	std::string getHandDescriptionString() const;
 	int getTotalBet() const;
 	bool setBet(int bet) const;
-	bool doubleBet() const;
+	bool addBet(int adds = -1) const;
 	int getLeftBet() const;
 	void addCard(Card card) const;
 	std::vector<int> getCardTotal() const;
-	bool tryDouble() const;
+	bool tryAddBet(int adds = -1) const;
 	bool isBlackJack() const;
 	int getBest() const;
 	void endGameSet(GameResult result, float times) const;
