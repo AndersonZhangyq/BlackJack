@@ -7,27 +7,32 @@ Card::Card()
 
 Card::Card(int num, Card_type type)
 {
+	cardNumber = getCardNumber(num);
+	number = num >= 10 ? 10 : num;
+	this->type = type;
+}
+
+std::string Card::getCardNumber(int num)
+{
 	if (num == 1)
-		cardNumber = "A";
+		return "A";
 	else if (num >= 2 && num <= 10)
-		cardNumber = std::to_string(num);
+		return std::to_string(num);
 	else
 	{
 		switch (num)
 		{
 		case 11:
-			cardNumber = "J";
+			return "J";
 			break;
 		case 12:
-			cardNumber = "Q";
+			return "Q";
 			break;
 		case 13:
-			cardNumber = "K";
+			return "K";
 			break;
 		}
 	}
-	number = num >= 10 ? 10 : num;
-	this->type = type;
 }
 
 int Card::getNumber() const
@@ -35,7 +40,7 @@ int Card::getNumber() const
 	return number;
 }
 
-std::string Card::getType() const
+std::string Card::getType(Card_type type)
 {
 	std::string card_type = "";
 	switch (type) {
@@ -59,4 +64,9 @@ std::string Card::getStringDescription() const
 {
 	std::string description = getType() + "  " + cardNumber;
 	return description;
+}
+
+std::string Card::getType() const
+{
+	return getType(type);
 }

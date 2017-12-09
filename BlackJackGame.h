@@ -15,6 +15,7 @@ public:
 	void playToEnd(bool& dealerBoom);
 	bool preCheck();
 private:
+	void preConfig();
 
 	int deckAmount;
 	int player_amount;

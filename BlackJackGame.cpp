@@ -21,6 +21,7 @@ BlackJackGame::BlackJackGame(int playerAmount, int deckAmount)
 
 void BlackJackGame::startGame()
 {
+	preConfig();
 	cout << endl << "------ 开始下注 ------" << endl;
 	for (int i = 0; i < player_amount; i++) {
 		//  玩家处于无法继续游戏的状态
@@ -220,4 +221,151 @@ bool BlackJackGame::preCheck()
 		}
 	}
 	return canPlay > 0;
+}
+
+void BlackJackGame::preConfig()
+{
+	cout << endl << "------ 游戏自定设置 ------" << endl;
+	string cmd;
+	cout << "是否需要去掉指定牌？[y/N]" << endl;
+	cin >> cmd;
+	if (cmd == "y")
+	{
+		int opCode;
+		do
+		{
+			Printer::removeCardCommandHelper();
+			string op;
+			cin >> op;
+			try
+			{
+				opCode = stoi(op);
+			}
+			catch (exception e)
+			{
+				cout << "错误的操作码！请重新输入！" << endl;
+				continue;;
+			}
+			if (1 <= opCode && opCode <= 3)
+				break;
+			cout << "错误的操作码！请重新输入！" << endl;
+		} while (true);
+		switch (opCode + 4)
+		{
+		case RemoveCard:
+		{
+			int i = 0;
+			while (true)
+			{
+				int cardType;
+				do
+				{
+					Printer::removeCardByType();
+					string op;
+					cin >> op;
+					try
+					{
+						cardType = stoi(op);
+					}
+					catch (exception e)
+					{
+						cout << "错误的操作码！请重新输入！" << endl;
+						continue;;
+					}
+					if (-1 == cardType || (1 <= cardType && cardType <= 4))
+						break;
+					cout << "错误的操作码！请重新输入！" << endl;
+				} while (true);
+				if (cardType == -1)
+					break;
+				int cardNum;
+				do
+				{
+					cout << "请输入要去掉牌的数字，输入 -1 可退出当前操作：" << endl;
+					string cN;
+					cin >> cN;
+					try
+					{
+						cardNum = stoi(cN);
+					}
+					catch (exception e)
+					{
+						cout << "请输入数字！" << endl;
+						continue;;
+					}
+					if (-1 == cardNum || (1 <= cardNum && cardNum <= 13))
+						break;
+					cout << "错误的操作码！请重新输入！" << endl;
+				} while (true);
+				if (cardNum == -1)
+					break;
+				deck.removeCard(cardNum, cardType - 1);
+				i++;
+				if (i == 2)
+					break;
+				cout << "是否再拿出一张牌？[y/N]" << endl;
+				string op;
+				cin >> op;
+				if (op != "y")
+					break;
+			}
+			break;
+		}
+		case RemoveByType:
+		{
+			int cardType;
+			do
+			{
+				Printer::removeCardByType();
+				string op;
+				cin >> op;
+				try
+				{
+					cardType = stoi(op);
+				}
+				catch (exception e)
+				{
+					cout << "错误的操作码！请重新输入！" << endl;
+					continue;;
+				}
+				if (-1 == opCode || (1 <= opCode && opCode <= 4))
+					break;
+				cout << "错误的操作码！请重新输入！" << endl;
+			} while (true);
+			if (cardType >= 1 && cardType <= 4)
+			{
+				deck.removeCard(-1, cardType - 1);
+			}
+		}
+		break;
+		case RemoveByNum:
+		{
+			int cardNum = 0;
+			do
+			{
+				cout << "请输入要去掉牌的数字，输入 -1 可退出当前操作：" << endl;
+				string cN;
+				cin >> cN;
+				try
+				{
+					cardNum = stoi(cN);
+				}
+				catch (exception e)
+				{
+					cout << "请输入数字！" << endl;
+					continue;;
+				}
+				if (-1 == cardNum || (1 <= cardNum && cardNum <= 13))
+					break;
+				cout << "错误的操作码！请重新输入！" << endl;
+			} while (true);
+			if (cardNum >= 1 && cardNum <= 13)
+			{
+				deck.removeCard(cardNum, -1);
+			}
+			break;
+		}
+		}
+	}
+	cout << "游戏自定设置已完成！" << endl;
 }

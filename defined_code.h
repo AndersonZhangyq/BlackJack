@@ -16,7 +16,11 @@ enum Card_type
 };
 enum OperationCode
 {
-	Double, Hit, Stand, Deal, Terminate
+	// For playGame
+	Double, Hit, Stand, Deal, Terminate,
+
+	// For preConfig
+	RemoveCard, RemoveByNum, RemoveByType
 };
 enum GameResult
 {
