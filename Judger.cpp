@@ -43,7 +43,7 @@ bool Judger::isPlayerBoom(Player player, int player_id)
 {
 	std::vector<int> total = player.getCardTotal();
 	// If the smallest sum is bigger than 21, than boom
-	if (total[0] > 21)
+	if (total[0] > 22)
 	{
 		Printer::boom(total[0], player.getHandDescriptionString(), player_id);
 		return true;
@@ -55,7 +55,7 @@ bool Judger::isDealerBoom(Dealer dealer)
 {
 	std::vector<int> total = dealer.getCardTotal();
 	// If the smallest sum is bigger than 21, than boom
-	if (total[0] > 21)
+	if (total[0] > 22)
 	{
 		Printer::boom(total[0], dealer.getHandDescriptionString(), -1);
 		return true;

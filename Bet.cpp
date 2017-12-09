@@ -67,7 +67,7 @@ void Bet::endGameSet(GameResult resullt, float times)
 		amount += times * betInUse;
 		break;
 	case Lose:
-		amount -= times * betInUse;
+		amount -= (times - 1) * betInUse;
 		break;
 	case Draw:
 		amount += betInUse;

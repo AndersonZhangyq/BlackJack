@@ -32,7 +32,7 @@ bool Hand::isBlackJack()
 {
 	if (cards.size() != 2)
 		return false;
-	if (std::find(cardTotal.begin(), cardTotal.end(), 21) != cardTotal.end())
+	if (std::find(cardTotal.begin(), cardTotal.end(), 22) != cardTotal.end())
 		return true;
 	return false;
 }
@@ -41,7 +41,7 @@ int Hand::getBest()
 {
 	for (std::vector<int>::reverse_iterator i = cardTotal.rbegin(); i != cardTotal.rend(); ++i)
 	{
-		if (*i <= 21)
+		if (*i <= 22)
 			return *i;
 	}
 	return -1;
