@@ -7,7 +7,8 @@
 
 class BlackJackGame;
 
-class Player{
+class Player
+{
 public:
 	Player();
 	Player(BlackJackGame game);
@@ -21,7 +22,7 @@ public:
 	bool tryDouble() const;
 	bool isBlackJack() const;
 	int getBest() const;
-	void endGameSet(GameResult result,float times) const;
+	void endGameSet(GameResult result, float times) const;
 	bool canStartGame() const;
 private:
 	// void recursive_get_card_total(std::vector<int>& total, int curernt_index, int temp_sum);

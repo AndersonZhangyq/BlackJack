@@ -9,7 +9,7 @@ Player::Player()
 {
 }
 
-Player::Player(BlackJackGame game) :bet_(new Bet()), hand_(new Hand())
+Player::Player(BlackJackGame game) : bet_(new Bet()), hand_(new Hand())
 {
 	game_ = &game;
 }
@@ -30,7 +30,7 @@ bool Player::setBet(int bet) const
 }
 
 bool Player::doubleBet() const
-{	
+{
 	return bet_->doubleBet();
 }
 
@@ -64,7 +64,7 @@ int Player::getBest() const
 	return hand_->getBest();
 }
 
-void Player::endGameSet(GameResult result,float tiems) const
+void Player::endGameSet(GameResult result, float tiems) const
 {
 	bet_->endGameSet(result, tiems);
 	hand_->reset();

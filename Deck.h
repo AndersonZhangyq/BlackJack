@@ -2,7 +2,8 @@
 #include "Card.h"
 #include <vector>
 
-class Deck {
+class Deck
+{
 public:
 	Deck();
 	Deck(int deckNumber);

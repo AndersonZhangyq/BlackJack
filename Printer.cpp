@@ -32,6 +32,7 @@ void Printer::boom(int cardTotal, string description, int player_id)
 			<< "手牌总数为 " << cardTotal << endl;
 	}
 }
+
 void Printer::commandHelper()
 {
 	cout << "你可以选择以下操作：" << endl
@@ -47,7 +48,6 @@ void Printer::removeCardCommandHelper()
 		<< RemoveCard - 4 << "：去掉指定的一张牌,  "
 		<< RemoveByNum - 4 << "：去掉指定数字的牌,  "
 		<< RemoveByType - 4 << "：去掉指定花色的牌,  " << endl;
-
 }
 
 void Printer::removeCardByType()
@@ -57,7 +57,7 @@ void Printer::removeCardByType()
 		<< Hearts + 1 << "：红桃,  "
 		<< Clubs + 1 << "：草花,  "
 		<< Diamonds + 1 << "：方片,  "
-		<< -1 << "：退出当前操作"<< endl;
+		<< -1 << "：退出当前操作" << endl;
 }
 
 void Printer::setBet(bool isSuccess, int bet, int left)

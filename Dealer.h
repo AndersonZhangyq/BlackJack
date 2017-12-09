@@ -6,7 +6,8 @@
 
 class BlackJackGame;
 
-class Dealer{
+class Dealer
+{
 public:
 	Dealer();
 	Dealer(BlackJackGame game);

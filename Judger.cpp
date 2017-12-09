@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Judger::judgeWinner(Player player, Dealer dealer,int player_id, float times)
+void Judger::judgeWinner(Player player, Dealer dealer, int player_id, float times)
 {
 	if (dealer.isBlackJack())
 	{
@@ -26,7 +26,8 @@ void Judger::judgeWinner(Player player, Dealer dealer,int player_id, float times
 	{
 		cout << "玩家 " << player_id << " 赢了！手牌总和为：" << p_b;
 		player.endGameSet(Win, times);
-	}else if (p_b < d_b)
+	}
+	else if (p_b < d_b)
 	{
 		cout << "玩家 " << player_id << " 输了！手牌总和为：" << p_b;
 		player.endGameSet(Lose, times);

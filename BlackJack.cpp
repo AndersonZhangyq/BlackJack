@@ -24,6 +24,6 @@ int main(int argc, char* argv[])
 		if (continueGame != "y")
 			break;
 	}
-	cout << endl <<  "游戏已结束，退出程序中......" << endl;
+	cout << endl << "游戏已结束，退出程序中......" << endl;
 	return 0;
 }

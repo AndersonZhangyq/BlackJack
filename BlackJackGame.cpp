@@ -12,7 +12,8 @@ BlackJackGame::BlackJackGame(int playerAmount, int deckAmount)
 	deck = Deck(deckAmount);
 	player_amount = playerAmount;
 	dealer = Dealer(*this);
-	for (int i = 0; i < player_amount; i++) {
+	for (int i = 0; i < player_amount; i++)
+	{
 		Player tmp(*this);
 		players.push_back(tmp);
 		playerStatus.push_back(Playing);
@@ -23,7 +24,8 @@ void BlackJackGame::startGame()
 {
 	preConfig();
 	cout << endl << "------ 开始下注 ------" << endl;
-	for (int i = 0; i < player_amount; i++) {
+	for (int i = 0; i < player_amount; i++)
+	{
 		//  玩家处于无法继续游戏的状态
 		if (playerStatus[i] == Exit)
 			continue;
@@ -46,7 +48,8 @@ void BlackJackGame::startGame()
 			}
 			if (current_player.setBet(_bet) == true)
 				break;
-		} while (true);
+		}
+		while (true);
 	}
 	cout << endl << "------ 第一轮发牌开始 ------" << endl;
 	Card cardGot = deck.getCard();
@@ -84,7 +87,8 @@ void BlackJackGame::startGame()
 
 void BlackJackGame::playGame()
 {
-	for (int i = 0; i < player_amount; i++) {
+	for (int i = 0; i < player_amount; i++)
+	{
 		//  玩家处于无法继续游戏的状态
 		if (playerStatus[i] == Exit)
 			continue;
@@ -114,16 +118,17 @@ void BlackJackGame::playGame()
 				if (1 <= opCode && opCode <= 5)
 					break;
 				cout << "错误的操作码！请重新输入！" << endl;
-			} while (true);
+			}
+			while (true);
 			switch (opCode)
 			{
 			case Hit:
-			{
-				Card cardGot = deck.getCard();
-				current_player.addCard(cardGot);
-				cout << "你拿到的牌为：" << cardGot.getStringDescription() << endl;
-				break;
-			}
+				{
+					Card cardGot = deck.getCard();
+					current_player.addCard(cardGot);
+					cout << "你拿到的牌为：" << cardGot.getStringDescription() << endl;
+					break;
+				}
 			case Stand:
 				endRound = true;
 				break;
@@ -136,7 +141,8 @@ void BlackJackGame::playGame()
 				break;
 			}
 			isBoomed = Judger::isPlayerBoom(current_player, i);
-		} while (isBoomed == false && chooseTerminate == false && endRound == false);
+		}
+		while (isBoomed == false && chooseTerminate == false && endRound == false);
 		// Theoretically impossible to choose the final one "Playing"
 		playerStatus[i] = (isBoomed ? Boom : (endRound ? WaitForJudge : (chooseTerminate ? Terminated : BadStatus)));
 		// If BadStatus show, must be terrible error. Termiate the program
@@ -249,13 +255,72 @@ void BlackJackGame::preConfig()
 			if (1 <= opCode && opCode <= 3)
 				break;
 			cout << "错误的操作码！请重新输入！" << endl;
-		} while (true);
+		}
+		while (true);
 		switch (opCode + 4)
 		{
 		case RemoveCard:
-		{
-			int i = 0;
-			while (true)
+			{
+				int i = 0;
+				while (true)
+				{
+					int cardType;
+					do
+					{
+						Printer::removeCardByType();
+						string op;
+						cin >> op;
+						try
+						{
+							cardType = stoi(op);
+						}
+						catch (exception e)
+						{
+							cout << "错误的操作码！请重新输入！" << endl;
+							continue;;
+						}
+						if (-1 == cardType || (1 <= cardType && cardType <= 4))
+							break;
+						cout << "错误的操作码！请重新输入！" << endl;
+					}
+					while (true);
+					if (cardType == -1)
+						break;
+					int cardNum;
+					do
+					{
+						cout << "请输入要去掉牌的数字，输入 -1 可退出当前操作：" << endl;
+						string cN;
+						cin >> cN;
+						try
+						{
+							cardNum = stoi(cN);
+						}
+						catch (exception e)
+						{
+							cout << "请输入数字！" << endl;
+							continue;;
+						}
+						if (-1 == cardNum || (1 <= cardNum && cardNum <= 13))
+							break;
+						cout << "错误的操作码！请重新输入！" << endl;
+					}
+					while (true);
+					if (cardNum == -1)
+						break;
+					deck.removeCard(cardNum, cardType - 1);
+					i++;
+					if (i == 2)
+						break;
+					cout << "是否再拿出一张牌？[y/N]" << endl;
+					string op;
+					cin >> op;
+					if (op != "y")
+						break;
+				}
+				break;
+			}
+		case RemoveByType:
 			{
 				int cardType;
 				do
@@ -272,13 +337,20 @@ void BlackJackGame::preConfig()
 						cout << "错误的操作码！请重新输入！" << endl;
 						continue;;
 					}
-					if (-1 == cardType || (1 <= cardType && cardType <= 4))
+					if (-1 == opCode || (1 <= opCode && opCode <= 4))
 						break;
 					cout << "错误的操作码！请重新输入！" << endl;
-				} while (true);
-				if (cardType == -1)
-					break;
-				int cardNum;
+				}
+				while (true);
+				if (cardType >= 1 && cardType <= 4)
+				{
+					deck.removeCard(-1, cardType - 1);
+				}
+			}
+			break;
+		case RemoveByNum:
+			{
+				int cardNum = 0;
 				do
 				{
 					cout << "请输入要去掉牌的数字，输入 -1 可退出当前操作：" << endl;
@@ -296,75 +368,14 @@ void BlackJackGame::preConfig()
 					if (-1 == cardNum || (1 <= cardNum && cardNum <= 13))
 						break;
 					cout << "错误的操作码！请重新输入！" << endl;
-				} while (true);
-				if (cardNum == -1)
-					break;
-				deck.removeCard(cardNum, cardType - 1);
-				i++;
-				if (i == 2)
-					break;
-				cout << "是否再拿出一张牌？[y/N]" << endl;
-				string op;
-				cin >> op;
-				if (op != "y")
-					break;
+				}
+				while (true);
+				if (cardNum >= 1 && cardNum <= 13)
+				{
+					deck.removeCard(cardNum, -1);
+				}
+				break;
 			}
-			break;
-		}
-		case RemoveByType:
-		{
-			int cardType;
-			do
-			{
-				Printer::removeCardByType();
-				string op;
-				cin >> op;
-				try
-				{
-					cardType = stoi(op);
-				}
-				catch (exception e)
-				{
-					cout << "错误的操作码！请重新输入！" << endl;
-					continue;;
-				}
-				if (-1 == opCode || (1 <= opCode && opCode <= 4))
-					break;
-				cout << "错误的操作码！请重新输入！" << endl;
-			} while (true);
-			if (cardType >= 1 && cardType <= 4)
-			{
-				deck.removeCard(-1, cardType - 1);
-			}
-		}
-		break;
-		case RemoveByNum:
-		{
-			int cardNum = 0;
-			do
-			{
-				cout << "请输入要去掉牌的数字，输入 -1 可退出当前操作：" << endl;
-				string cN;
-				cin >> cN;
-				try
-				{
-					cardNum = stoi(cN);
-				}
-				catch (exception e)
-				{
-					cout << "请输入数字！" << endl;
-					continue;;
-				}
-				if (-1 == cardNum || (1 <= cardNum && cardNum <= 13))
-					break;
-				cout << "错误的操作码！请重新输入！" << endl;
-			} while (true);
-			if (cardNum >= 1 && cardNum <= 13)
-			{
-				deck.removeCard(cardNum, -1);
-			}
-			break;
-		}
 		}
 	}
 	cout << "游戏自定设置已完成！" << endl;

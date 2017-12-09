@@ -9,7 +9,10 @@ Deck::Deck()
 {
 	srand(time(0));
 	deckNumber = 1;
-	vector<int> tmp = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 };
+	vector<int> tmp = {
+		1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
+		43,44,45,46,47,48,49,50,51,52
+	};
 	allCards.push_back(tmp);
 }
 
@@ -17,8 +20,12 @@ Deck::Deck(int deckNumber)
 {
 	srand(time(0));
 	this->deckNumber = deckNumber;
-	vector<int> tmp = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 };
-	for (int i = 0; i < deckNumber; i++) {
+	vector<int> tmp = {
+		1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
+		43,44,45,46,47,48,49,50,51,52
+	};
+	for (int i = 0; i < deckNumber; i++)
+	{
 		allCards.push_back(tmp);
 	}
 }
@@ -40,8 +47,12 @@ Card Deck::getCard()
 
 void Deck::restore()
 {
-	vector<int> tmp = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 };
-	for (int i = 0; i < deckNumber; i++) {
+	vector<int> tmp = {
+		1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
+		43,44,45,46,47,48,49,50,51,52
+	};
+	for (int i = 0; i < deckNumber; i++)
+	{
 		allCards.push_back(tmp);
 	}
 }
@@ -81,7 +92,7 @@ void Deck::removeCardByType(Card_type card_type)
 	bool isSuccess = false;
 	for (auto i = allCards.begin(); i != allCards.end(); ++i)
 	{
-		for (auto j = (*i).begin(); j != (*i).end(); )
+		for (auto j = (*i).begin(); j != (*i).end();)
 		{
 			if ((*j - 1) % 4 == card_type_int)
 			{
@@ -103,9 +114,9 @@ void Deck::removeCardByNumber(int card_num)
 	bool isSuccess = false;
 	for (auto i = allCards.begin(); i != allCards.end(); ++i)
 	{
-		for (auto j = (*i).begin(); j != (*i).end(); )
+		for (auto j = (*i).begin(); j != (*i).end();)
 		{
-			if ((*j - 1) / 4  + 1== card_num)
+			if ((*j - 1) / 4 + 1 == card_num)
 			{
 				isSuccess = true;
 				j = (*i).erase(j);

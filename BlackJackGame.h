@@ -6,7 +6,8 @@
 
 using namespace std;
 
-class BlackJackGame {
+class BlackJackGame
+{
 public:
 	BlackJackGame(int playerAmount, int deckAmount = 1);
 	void playGame();

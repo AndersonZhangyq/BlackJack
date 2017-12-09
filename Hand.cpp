@@ -4,7 +4,7 @@
 
 Hand::Hand()
 {
-	cardTotal = { 0 };
+	cardTotal = {0};
 }
 
 void Hand::addCard(Card card)
@@ -50,7 +50,7 @@ int Hand::getBest()
 void Hand::reset()
 {
 	cardTotal.clear();
-	cardTotal = { 0 };
+	cardTotal = {0};
 	cards.clear();
 }
 

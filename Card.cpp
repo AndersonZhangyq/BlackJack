@@ -43,7 +43,8 @@ int Card::getNumber() const
 std::string Card::getType(Card_type type)
 {
 	std::string card_type = "";
-	switch (type) {
+	switch (type)
+	{
 	case Sqades:
 		card_type = "ºÚÌÒ";
 		break;

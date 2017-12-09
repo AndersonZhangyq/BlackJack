@@ -6,7 +6,7 @@ Dealer::Dealer()
 {
 }
 
-Dealer::Dealer(BlackJackGame game) :hand_(new Hand())
+Dealer::Dealer(BlackJackGame game) : hand_(new Hand())
 {
 	game_ = &game;
 }

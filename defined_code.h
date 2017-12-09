@@ -2,7 +2,8 @@
 
 enum PlayerStatus
 {
-	Playing, Boom,
+	Playing,
+	Boom,
 	// Player stand before boom and is waiting for dealer finish drawing cards
 	WaitForJudge,
 	Terminated,
@@ -10,19 +11,33 @@ enum PlayerStatus
 	// Theoretically impossible
 	BadStatus
 };
+
 enum Card_type
 {
-	Sqades, Hearts, Clubs, Diamonds
+	Sqades,
+	Hearts,
+	Clubs,
+	Diamonds
 };
+
 enum OperationCode
 {
 	// For playGame
-	Double, Hit, Stand, Deal, Terminate,
+	Double,
+	Hit,
+	Stand,
+	Deal,
+	Terminate,
 
 	// For preConfig
-	RemoveCard, RemoveByNum, RemoveByType
+	RemoveCard,
+	RemoveByNum,
+	RemoveByType
 };
+
 enum GameResult
 {
-	Win, Lose, Draw
+	Win,
+	Lose,
+	Draw
 };

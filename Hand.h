@@ -2,7 +2,8 @@
 #include "Card.h"
 #include <vector>
 
-class Hand {
+class Hand
+{
 public:
 	Hand();
 	void addCard(Card card);
