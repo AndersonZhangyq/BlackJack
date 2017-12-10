@@ -63,24 +63,33 @@ bool Bet::tryAddBet(int adds) const
 	return canAddBet(adds);
 }
 
-void Bet::endGameSet(GameResult resullt, float times)
+void Bet::afterJudgeSetBet(GameResult result, float times, bool isPlayerJudge, int bet_amount)
 {
-	switch (resullt)
+	if (!isPlayerJudge)
+		bet_amount = betInUse;
+	switch (result)
 	{
 	case Win:
-		amount += times * betInUse;
+		amount += times * bet_amount;
 		break;
 	case Lose:
-		amount -= (times - 1) * betInUse;
+		if (isPlayerJudge)
+			amount -= times * bet_amount;
+		else
+			amount -= (times - 1) * betInUse;
 		break;
 	case Draw:
-		amount += betInUse;
+		amount += bet_amount;
 		break;
 	}
-	betInUse = 0;
 }
 
 bool Bet::canStartGame() const
 {
 	return amount > 0;
+}
+
+void Bet::resetBet()
+{
+	betInUse = 0;
 }

@@ -9,7 +9,10 @@ int main(int argc, char* argv[])
 	int playerNum;
 	cout << "请输入玩家总数：" << endl;
 	cin >> playerNum;
-	BlackJackGame game(playerNum);
+	int deckAmount;
+	cout << "请输入牌堆数：" << endl;
+	cin >> deckAmount;
+	BlackJackGame game(playerNum, deckAmount);
 	while (true)
 	{
 		if (game.preCheck() == false)

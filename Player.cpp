@@ -64,15 +64,20 @@ int Player::getBest() const
 	return hand_->getBest();
 }
 
-void Player::endGameSet(GameResult result, float tiems) const
+void Player::afterJudgeSetBet(GameResult result, float tiems, bool isPlayerJudge, int bet_amount) const
 {
-	bet_->endGameSet(result, tiems);
-	hand_->reset();
+	bet_->afterJudgeSetBet(result, tiems, isPlayerJudge, bet_amount);
 }
 
 bool Player::canStartGame() const
 {
 	return bet_->canStartGame();
+}
+
+void Player::reset()
+{
+	bet_->resetBet();
+	hand_->reset();
 }
 
 /*void Player::recursive_get_card_total(std::vector<int>& total, int current_index, int temp_sum)

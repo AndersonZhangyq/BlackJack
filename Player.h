@@ -22,8 +22,9 @@ public:
 	bool tryAddBet(int adds = -1) const;
 	bool isBlackJack() const;
 	int getBest() const;
-	void endGameSet(GameResult result, float times) const;
+	void afterJudgeSetBet(GameResult result, float times, bool isPlayerJudge = false, int bet_amount = -1) const;
 	bool canStartGame() const;
+	void reset();
 private:
 	// void recursive_get_card_total(std::vector<int>& total, int curernt_index, int temp_sum);
 	Bet* bet_;

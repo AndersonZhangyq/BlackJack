@@ -44,7 +44,7 @@ int Hand::getBest()
 		if (*i <= 22)
 			return *i;
 	}
-	return -1;
+	return cardTotal[0];
 }
 
 void Hand::reset()

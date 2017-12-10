@@ -46,9 +46,9 @@ void Printer::commandHelper()
 void Printer::removeCardCommandHelper()
 {
 	cout << "你可以选择以下操作：" << endl
-		<< RemoveCard - 4 << "：去掉指定的一张牌,  "
-		<< RemoveByNum - 4 << "：去掉指定数字的牌,  "
-		<< RemoveByType - 4 << "：去掉指定花色的牌,  " << endl;
+		<< RemoveCard - 5 << "：去掉指定的一张牌,  "
+		<< RemoveByNum - 5 << "：去掉指定数字的牌,  "
+		<< RemoveByType - 5 << "：去掉指定花色的牌,  " << endl;
 }
 
 void Printer::removeCardByType()

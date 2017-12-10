@@ -17,7 +17,7 @@ public:
 	bool preCheck();
 private:
 	void preConfig();
-
+	void setCanJudgeWith();
 	int deckAmount;
 	int player_amount;
 	Dealer dealer;
@@ -25,4 +25,5 @@ private:
 	std::vector<PlayerStatus> playerStatus;
 	Deck deck;
 	float times = 1.5;
+	vector<vector<int>> canJudgeWith;
 };

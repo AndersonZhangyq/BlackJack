@@ -18,10 +18,13 @@ BlackJackGame::BlackJackGame(int playerAmount, int deckAmount)
 		players.push_back(tmp);
 		playerStatus.push_back(Playing);
 	}
+	canJudgeWith = vector<vector<int>>(player_amount, vector<int>(player_amount, 0));
 }
 
 bool BlackJackGame::preCheck()
 {
+	canJudgeWith = vector<vector<int>>(player_amount, vector<int>(player_amount, 0));
+	deck.restore();
 	cout << "------ 检查玩家能否开始游戏 ------" << endl;
 	int canPlay = 0;
 	for (int i = 0; i < player_amount; i++)
@@ -77,7 +80,7 @@ void BlackJackGame::preConfig()
 			cout << "错误的操作码！请重新输入！" << endl;
 		}
 		while (true);
-		switch (opCode + 4)
+		switch (opCode + 5)
 		{
 		case RemoveCard:
 			{
@@ -201,6 +204,19 @@ void BlackJackGame::preConfig()
 	cout << "游戏自定设置已完成！" << endl;
 }
 
+void BlackJackGame::setCanJudgeWith()
+{
+	for (auto i = 0; i < player_amount; ++i)
+	{
+		canJudgeWith[i][i] = -1;
+		if (playerStatus[i] == Terminated || playerStatus[i] == Exit || playerStatus[i] == BadStatus)
+			for (int j = 0; j < player_amount; ++j)
+			{
+				canJudgeWith[j][i] = -1;
+			}
+	}
+}
+
 void BlackJackGame::startGame()
 {
 	preConfig();
@@ -226,6 +242,11 @@ void BlackJackGame::startGame()
 			{
 				cout << "请输入一个数字！" << endl;
 				continue;;
+			}
+			if (_bet <= 0)
+			{
+				cout << "请输入大于零的赌注！" << endl;
+				continue;
 			}
 			if (current_player.setBet(_bet) == true)
 				break;
@@ -365,14 +386,71 @@ void BlackJackGame::endGame()
 	playToEnd(dealerBoom);
 	if (dealerBoom == false)
 		cout << endl << "庄家操作结束，庄家的手牌为：" << dealer.getHandDescriptionString() << endl;
+	setCanJudgeWith();
 	cout << endl << "------ 进入游戏结算 ------" << endl;
 	for (int i = 0; i < player_amount; ++i)
 	{
+		cout << endl << "------ 玩家 " << i << " 的结算 ------" << endl;
+		string canJudgeWithPlayerId = "";
+		for (int j = 0; j < player_amount; ++j)
+		{
+			if (0 == canJudgeWith[i][j])
+				canJudgeWithPlayerId += "玩家 " + to_string(j) + " ";
+		}
+		if (canJudgeWithPlayerId != "")
+		{
+			cout << endl << "是否需要和其他玩家进行比较？[y/N]" << endl;
+			string needJudge;
+			cin >> needJudge;
+			if (needJudge == "y")
+			{
+				cout << "请输入想要比较的玩家的id：" + canJudgeWithPlayerId << endl
+					<< "输入-1退出该操作。" << endl;
+				int player_id;
+				do
+				{
+					string id_string;
+					cin >> id_string;
+					try
+					{
+						player_id = stoi(id_string);
+					}
+					catch (exception e)
+					{
+						cout << "请输入数字！" << endl;
+						continue;;
+					}
+					if (player_id == -1)
+						break;
+					else
+					{
+						if (canJudgeWithPlayerId.find(" " + id_string + " ") != string::npos)
+							break;
+					}
+					cout << "错误的 id 号！请重新输入！" << endl;
+				}
+				while (true);
+				if (player_id != -1)
+				{
+					Judger::judegeBetweenPlayer(players[i], i, players[player_id], player_id);
+					canJudgeWith[i][player_id] = canJudgeWith[player_id][i] = -1;
+				}
+			}
+			else
+			{
+				cout << "已放弃和其他玩家进行比较" << endl;
+			}
+		}
+		else
+		{
+			cout << "没有可比较的玩家！" << endl;
+		}
+		cout << endl << "与庄家比较..." << endl;
 		switch (playerStatus[i])
 		{
 		case Boom:
 			cout << "玩家 " << i << " 输了。" << endl;
-			players[i].endGameSet(Lose, times);
+			players[i].afterJudgeSetBet(Lose, times);
 			break;
 		case Terminated:
 			cout << "玩家 " << i << " 终止了游戏。" << endl;
@@ -381,7 +459,7 @@ void BlackJackGame::endGame()
 			if (dealerBoom)
 			{
 				cout << "玩家 " << i << " 赢了。" << endl;
-				players[i].endGameSet(Win, times);
+				players[i].afterJudgeSetBet(Win, times);
 			}
 			else
 			{
@@ -389,6 +467,10 @@ void BlackJackGame::endGame()
 			}
 			break;
 		}
+	}
+	for (auto player : players)
+	{
+		player.reset();
 	}
 }
 

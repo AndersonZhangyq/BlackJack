@@ -10,8 +10,9 @@ public:
 	bool addBet(int adds = -1);
 	bool setBet(int bet);
 	bool tryAddBet(int adds = -1) const;
-	void endGameSet(GameResult result, float times);
+	void afterJudgeSetBet(GameResult result, float times, bool isPlayerJudge = false, int bet_amount = -1);
 	bool canStartGame() const;
+	void resetBet();
 private:
 	bool canAddBet(int adds) const;
 	bool canSetBet(int bet) const;
